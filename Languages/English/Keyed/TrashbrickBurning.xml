@@ -152,4 +152,6 @@
 	<STB_FuelValuesHeader>What each fuel is worth in trashbricks, and how dirty it burns against a trashbrick (toxic gas, ground pollution). Hay, cloth, bioferrite, deepchem and corpses start refused.</STB_FuelValuesHeader>
 	<STB_FuelLine>{0}: worth {1}, gas x{2}, pollution x{3}</STB_FuelLine>
 	<STB_FuelLineCorpse>Corpses: worth 1 brick per {0} kg of body (a human about {1}); stripped as they go in. Gas x{2}, rot stink x{3}, pollution x{4}</STB_FuelLineCorpse>
+	<STB_SettingSteamClouds>Visible steam clouds</STB_SettingSteamClouds>
+	<STB_SettingSteamCloudsDesc>On: steam from vents, Overpressure Tank releases and bleeds, safety valves, leaks and bursts hangs in the air as a white cloud. It spreads through open cells and open doors, drifts off quickly outdoors, and indoors fills the room and keeps it hot - up to about 100°C - until it condenses. Off: steam is just puffs, and only the heat stays.</STB_SettingSteamCloudsDesc>
 </LanguageData>

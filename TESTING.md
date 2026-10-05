@@ -103,6 +103,12 @@ God mode on, then build a **cobbled trash gasifier**. Give it trashbricks (debug
   With **chemfuel**: x1.5 / x0.6.
 - [ ] **Sync burners** copies the fuel bill (filter and radius). An old save whose burner had *Accept
   wastepacks* off loads with wastepacks refused in its fuel bill.
+- [ ] **Visible steam:** in a closed room, set a steam vent (or an Overpressure Tank's auto-release) blowing.
+  A white fog spreads out from it and fills the room within a minute or two, churning slowly; the
+  room heats much faster than before and levels off around 100°C. Open a door: the fog drifts
+  through. Outdoors the steam blows away within seconds. Stop the vent: the fog thins and clears over
+  a game hour or so. Bleed a full tank: a big cloud. Save and reload with fog in a room: it's still
+  there. Setting *Visible steam clouds* off: the fog clears and only puffs remain.
 - [ ] **Wall exhaust port:** hangs on a wall (it won't place away from one) without replacing it,
   drawn on the wall's face. Hung outside, gas drifts off and the ground below slowly pollutes. Hung
   inside a closed room, toxic gas builds up quickly and the room warms a little.

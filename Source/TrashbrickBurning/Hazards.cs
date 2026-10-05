@@ -81,6 +81,8 @@ namespace TrashbrickBurning
                 {
                     FleckMaker.ThrowSmoke(cell.ToVector3Shifted(), map, Rand.Range(1.4f, 2.6f));
                 }
+                // The cloud hangs: thick at the centre, thinner at the edge.
+                SteamGrid.Add(map, cell, 1.5f * (1f - 0.6f * cell.DistanceTo(center) / radius));
             }
             FleckMaker.ThrowHeatGlow(center, map, 4f);
             (DefDatabase<SoundDef>.GetNamedSilentFail("Explosion_Smoke")
@@ -100,6 +102,7 @@ namespace TrashbrickBurning
                 FleckMaker.ThrowSmoke(at, map, Rand.Range(0.6f, 1.0f));
             }
             GenTemperature.PushHeat(source.Position, map, 8f);
+            SteamGrid.Add(map, at.ToIntVec3(), 0.08f);
         }
     }
 
@@ -213,6 +216,7 @@ namespace TrashbrickBurning
             IntVec3 pos = parent.Position;
             FleckMaker.ThrowSmoke(parent.TrueCenter(), map, Rand.Range(0.8f, 1.3f));
             GenTemperature.PushHeat(pos, map, 30f);
+            SteamGrid.Add(map, pos, 0.8f);
             foreach (IntVec3 cell in GenAdj.CellsAdjacent8Way(parent).Concat(parent.OccupiedRect().Cells))
             {
                 if (!cell.InBounds(map))

@@ -681,6 +681,7 @@ namespace TrashbrickBurning
             stored -= vented;
             lastVent = vented * GenDate.TicksPerDay / 60f;
             GenTemperature.PushHeat(parent, lastVent * Props.ventHeatPerWattSecond);
+            SteamGrid.AddFromWatts(parent.Map, parent.Position, lastVent, 1f);
             if (Rand.Chance(0.5f))
             {
                 FleckMaker.ThrowSmoke(parent.TrueCenter(), parent.Map, Rand.Range(0.6f, 1.1f));
@@ -731,6 +732,8 @@ namespace TrashbrickBurning
             if (parent.Spawned)
             {
                 GenTemperature.PushHeat(parent.Position, parent.Map, bled * Props.bleedHeatPerWattDay);
+                // Bleeding a full tank fills its room with steam.
+                SteamGrid.Add(parent.Map, parent.Position, bled / 100f);
                 for (int i = 0; i < 6; i++)
                 {
                     FleckMaker.ThrowSmoke(parent.TrueCenter(), parent.Map, Rand.Range(1f, 1.8f));

@@ -23,6 +23,9 @@ namespace TrashbrickBurning
         /// <summary>Vanilla Furniture Expanded - Factory machines give off fumes while they work (CompFactoryFumes).</summary>
         public bool factoryFumes = true;
 
+        /// <summary>Steam hangs in the air as a visible cloud that spreads, heats rooms and condenses (SteamGrid).</summary>
+        public bool steamClouds = true;
+
         /// <summary>With Dubs Bad Hygiene in advanced mode, burners only burn with plumbing water flowing.</summary>
         public bool requireWater = true;
 
@@ -38,6 +41,7 @@ namespace TrashbrickBurning
             Scribe_Values.Look(ref hazards, "hazards", true);
             Scribe_Values.Look(ref otherFuels, "otherFuels", true);
             Scribe_Values.Look(ref factoryFumes, "factoryFumes", true);
+            Scribe_Values.Look(ref steamClouds, "steamClouds", true);
             Scribe_Values.Look(ref requireWater, "requireWater", true);
             Scribe_Values.Look(ref fuelUseMultiplier, "fuelUseMultiplier", 1f);
             Scribe_Values.Look(ref powerMultiplier, "powerMultiplier", 1f);
@@ -75,6 +79,7 @@ namespace TrashbrickBurning
             list.Label(s.advanced ? "STB_SettingAdvancedExplain".Translate() : "STB_SettingSimpleExplain".Translate());
             list.Gap();
             list.CheckboxLabeled("STB_SettingHazards".Translate(), ref s.hazards, "STB_SettingHazardsDesc".Translate());
+            list.CheckboxLabeled("STB_SettingSteamClouds".Translate(), ref s.steamClouds, "STB_SettingSteamCloudsDesc".Translate());
             list.CheckboxLabeled("STB_SettingOtherFuels".Translate(), ref s.otherFuels, "STB_SettingOtherFuelsDesc".Translate());
             // Only with Vanilla Furniture Expanded - Factory loaded (its About.xml has no packageId to check).
             if (DefDatabase<ThingDef>.GetNamedSilentFail("VFEFactory_AutomatedSmelter") != null)

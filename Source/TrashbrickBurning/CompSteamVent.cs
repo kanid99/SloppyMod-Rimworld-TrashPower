@@ -136,6 +136,7 @@ namespace TrashbrickBurning
                 return;
             }
             GenTemperature.PushHeat(plume, map, venting * Props.heatPerWattSecond);
+            SteamGrid.AddFromWatts(map, plume, venting, 1f);
             Vector3 at = plume.ToVector3Shifted();
             int puffs = venting > 1500f ? 3 : venting > 400f ? 2 : 1;
             for (int i = 0; i < puffs; i++)
