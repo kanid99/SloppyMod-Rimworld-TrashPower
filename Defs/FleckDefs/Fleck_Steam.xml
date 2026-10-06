@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Defs>
+
+	<!--
+		Steam hanging in the air (SteamGrid). Each steamy cell puffs these out now and then, more
+		often and more opaque the thicker the steam; they drift slowly, swell and fade. Drawn by
+		vanilla's fleck system, instanced in batches like fire smoke, so a room full of steam costs
+		about what a small fire does.
+	-->
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>STB_SteamPuff</defName>
+		<graphicData>
+			<texPath>Things/Gas/STB_Steam</texPath>
+			<renderInstanced>true</renderInstanced>
+			<color>(0.94,0.96,1,1)</color>
+		</graphicData>
+		<altitudeLayer>Gas</altitudeLayer>
+		<fadeInTime>0.6</fadeInTime>
+		<solidTime>0.8</solidTime>
+		<fadeOutTime>2.0</fadeOutTime>
+		<growthRate>0.12</growthRate>
+	</FleckDef>
+
+</Defs>

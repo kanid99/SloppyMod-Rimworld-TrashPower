@@ -4,12 +4,12 @@
 	<author>kanid99</author>
 	<packageId>kanid99.SloppyModTrashPower</packageId>
 	<!-- 0.9.<commit count>: Source/build.sh stamps it, and the Build line below. -->
-	<modVersion>0.9.51</modVersion>
+	<modVersion>0.9.52</modVersion>
 	<supportedVersions>
 		<li>1.5</li>
 		<li>1.6</li>
 	</supportedVersions>
-	<description>Build 0.9.51
+	<description>Build 0.9.52
 
 Burn the trashbricks from Vanilla Recycling Expanded for power.
 

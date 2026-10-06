@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using RimWorld;
-using RimWorld.Planet;
 using UnityEngine;
 using Verse;
 
@@ -35,9 +34,13 @@ namespace TrashbrickBurning
 
         private const float Gone = 0.005f;
 
-        /// <summary>Density at which a cell's fog is drawn at its thickest.</summary>
+        /// <summary>Density at which a cell puffs most often and most opaque.</summary>
         private const float FullFog = 0.6f;
-        private const int AlphaLevels = 12;
+
+        /// <summary>Chance a step that a cell at full fog puffs out a steam fleck.</summary>
+        private const float PuffChance = 0.45f;
+
+        private static FleckDef puffDef;
 
         private float[] grid;
         private HashSet<int> active = new HashSet<int>();
@@ -198,26 +201,27 @@ namespace TrashbrickBurning
                     GenTemperature.PushHeat(roomCell[pair.Key], map, pair.Value * HeatPerUnitPerSecond * StepSeconds);
                 }
             }
+            ThrowPuffs();
         }
 
         /// <summary>
-        /// Two layers: a soft square of fog in every steamy cell, so neighbours join seamlessly (as
-        /// vanilla gas is drawn), and over every third cell a bigger puff, jittered, slowly turning
-        /// and swaying, so it reads as churning cloud rather than tiles.
+        /// The visible steam: vanilla flecks, drawn instanced in batches like fire smoke. Each cell on
+        /// screen puffs one out now and then - more often and more opaque the thicker its steam - which
+        /// drifts a little, swells and fades over about three seconds. Only for the map being looked
+        /// at, and only cells in view.
         /// </summary>
-        public override void MapComponentUpdate()
+        private void ThrowPuffs()
         {
-            base.MapComponentUpdate();
-            if (active.Count == 0 || grid == null || Find.CurrentMap != map
-                || WorldRendererUtility.CurrentWorldRenderMode == WorldRenderMode.Planet)
+            if (Find.CurrentMap != map)
             {
                 return;
             }
-            LoadMaterials();
+            puffDef = puffDef ?? DefDatabase<FleckDef>.GetNamedSilentFail("STB_SteamPuff");
+            if (puffDef == null)
+            {
+                return;
+            }
             CellRect view = Find.CameraDriver.CurrentViewRect.ExpandedBy(2);
-            float time = Time.realtimeSinceStartup;
-            float baseAltitude = AltitudeLayer.Gas.AltitudeFor();
-            float puffAltitude = baseAltitude + 0.01f;
             foreach (int i in active)
             {
                 float d = grid[i];
@@ -226,57 +230,20 @@ namespace TrashbrickBurning
                     continue;
                 }
                 IntVec3 c = map.cellIndices.IndexToCell(i);
-                if (!view.Contains(c))
-                {
-                    continue;
-                }
                 float thick = Mathf.Min(1f, d / FullFog);
-                int level = Mathf.Clamp(Mathf.CeilToInt(thick * AlphaLevels) - 1, 0, AlphaLevels - 1);
-                uint hash = (uint)i * 2654435761u;
-
-                Vector3 pos = c.ToVector3Shifted();
-                pos.y = baseAltitude;
-                Matrix4x4 sheet = Matrix4x4.TRS(pos, Quaternion.AngleAxis((hash >> 7) % 4 * 90f, Vector3.up), Vector3.one);
-                Graphics.DrawMesh(MeshPool.plane10, sheet, sheetMats[level], 0);
-
-                if (hash % 3 != 0)
+                if (!view.Contains(c) || !Rand.Chance(PuffChance * (0.3f + 0.7f * thick)))
                 {
                     continue;
                 }
-                float phase = (hash >> 11) % 1024 / 163f;
-                pos.x += ((hash >> 3) % 100 / 100f - 0.5f) * 0.7f + 0.2f * Mathf.Sin(time * 0.3f + phase);
-                pos.z += ((hash >> 13) % 100 / 100f - 0.5f) * 0.7f + 0.2f * Mathf.Cos(time * 0.25f + phase * 1.3f);
-                pos.y = puffAltitude;
-                float size = 1.9f + 0.4f * ((hash >> 5) % 10) / 10f + 0.2f * thick;
-                float angle = (hash >> 17) % 360 + time * (6f + (hash >> 23) % 8);
-                Matrix4x4 puff = Matrix4x4.TRS(pos, Quaternion.AngleAxis(angle, Vector3.up), new Vector3(size, 1f, size));
-                Graphics.DrawMesh(MeshPool.plane10, puff, puffMats[level], 0);
+                Vector3 pos = c.ToVector3Shifted() + new Vector3(Rand.Range(-0.4f, 0.4f), 0f, Rand.Range(-0.4f, 0.4f));
+                FleckCreationData data = FleckMaker.GetDataStatic(pos, map, puffDef, Rand.Range(1.6f, 2.3f));
+                data.rotation = Rand.Range(0f, 360f);
+                data.rotationRate = Rand.Range(-12f, 12f);
+                data.velocityAngle = Rand.Range(0f, 360f);
+                data.velocitySpeed = Rand.Range(0.05f, 0.2f);
+                data.instanceColor = new Color(0.94f, 0.96f, 1f, 0.12f + 0.38f * thick);
+                map.flecks.CreateFleck(data);
             }
-        }
-
-        private static Material[] sheetMats;
-        private static Material[] puffMats;
-
-        private static void LoadMaterials()
-        {
-            if (sheetMats != null)
-            {
-                return;
-            }
-            sheetMats = Levels("Things/Gas/STB_SteamSheet", 0.75f);
-            puffMats = Levels("Things/Gas/STB_Steam", 0.55f);
-        }
-
-        private static Material[] Levels(string path, float scale)
-        {
-            Texture2D tex = ContentFinder<Texture2D>.Get(path, false) ?? BaseContent.WhiteTex;
-            Material[] levels = new Material[AlphaLevels];
-            for (int i = 0; i < AlphaLevels; i++)
-            {
-                float a = (0.06f + 0.5f * (i + 1) / AlphaLevels) * scale;
-                levels[i] = MaterialPool.MatFrom(tex, ShaderDatabase.Transparent, new Color(0.94f, 0.96f, 1f, a));
-            }
-            return levels;
         }
 
         public override void ExposeData()
