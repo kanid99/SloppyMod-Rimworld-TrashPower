@@ -179,13 +179,15 @@ namespace TrashbrickBurning
             return __exception;
         }
 
-        public static bool AddGasPrefix(GasType gasType, int amount)
+        public static bool AddGasPrefix(GasType gasType, ref int amount)
         {
             if (ticking == null || gasType != GasType.ToxGas)
             {
                 return true;
             }
-            return !ticking.TryRoute(amount);
+            amount = ticking.RouteGas(amount);
+            // What the ports and expansion tanks couldn't take still comes out at the compactor.
+            return amount > 0;
         }
     }
 }

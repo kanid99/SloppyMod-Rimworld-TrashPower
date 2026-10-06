@@ -131,7 +131,7 @@
 	<STB_DamperLabel>Toggle damper</STB_DamperLabel>
 	<STB_DamperDesc>Open or close this exhaust port. Closed - or without power - exhaust goes to the other ports on the network, or, with none open, back out of the burners as toxic gas.</STB_DamperDesc>
 	<STB_AlertToxicExhaust>Burner venting toxic exhaust</STB_AlertToxicExhaust>
-	<STB_AlertToxicExhaustDesc>These burners have no exhaust pipe to an open, powered exhaust port, so their exhaust is backing up and coming out around them as toxic gas.\n\nRun an exhaust pipe from under them to an exhaust port built outdoors, and make sure the port's draught fan has power.</STB_AlertToxicExhaustDesc>
+	<STB_AlertToxicExhaustDesc>These burners have no exhaust pipe to an open, powered exhaust port, and no exhaust expansion tank with room, so their exhaust is backing up and coming out around them as toxic gas.\n\nRun an exhaust pipe from under them to an exhaust port built outdoors, and make sure the port's draught fan has power. An exhaust expansion tank on the network holds the exhaust through short power cuts.</STB_AlertToxicExhaustDesc>
 	<STB_PortNoPower>NO POWER: the draught fan has stopped. Exhaust is backing up into the burners.</STB_PortNoPower>
 	<STB_SourceToPorts>Exhaust: its toxic gas goes down the exhaust pipe to {0} exhaust ports</STB_SourceToPorts>
 	<STB_SourceNoPort>Exhaust: no open, powered exhaust port on its exhaust pipe - the toxic gas comes out here</STB_SourceNoPort>
@@ -154,4 +154,10 @@
 	<STB_FuelLineCorpse>Corpses: worth 1 brick per {0} kg of body (a human about {1}); stripped as they go in. Gas x{2}, rot stink x{3}, pollution x{4}</STB_FuelLineCorpse>
 	<STB_SettingSteamClouds>Visible steam clouds</STB_SettingSteamClouds>
 	<STB_SettingSteamCloudsDesc>On: steam from vents, Overpressure Tank releases and bleeds, safety valves, leaks and bursts hangs in the air as a white cloud. It spreads through open cells and open doors, drifts off quickly outdoors, and indoors fills the room and keeps it hot - up to about 100°C - until it condenses. Off: steam is just puffs, and only the heat stays.</STB_SettingSteamCloudsDesc>
+	<STB_ExhaustToTank>Exhaust: no open, powered exhaust port - holding it in the exhaust expansion tanks</STB_ExhaustToTank>
+	<STB_TankHeld>Holding: {0} of {1} toxic gas ({2})</STB_TankHeld>
+	<STB_TankNoPipe>Not on an exhaust pipe: run one under it.</STB_TankNoPipe>
+	<STB_TankDraining>Draining into {0} exhaust ports.</STB_TankDraining>
+	<STB_TankHolding>Holding: no open, powered exhaust port to drain into.</STB_TankHolding>
+	<STB_TankFull>FULL: exhaust is backing up into the burners.</STB_TankFull>
 </LanguageData>

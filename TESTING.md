@@ -57,6 +57,12 @@ God mode on, then build a **cobbled trash gasifier**. Give it trashbricks (debug
 - [ ] **Port power:** an exhaust port needs 80W for its draught fan. Cut its power (or leave it
   unconnected) and it reads *NO POWER*, the burner reads *EXHAUST: no exhaust pipe to an open, powered
   exhaust port*, and the gas backs up around the burner. Power it again and the gas goes back out the port.
+- [ ] **Exhaust expansion tank:** put one on a burner's exhaust pipe. Cut the port's power: the
+  burner reads *holding it in the exhaust expansion tanks*, no gas comes out around it, and the tank's
+  *Holding* figure climbs. Restore power: the tank reads *Draining into 1 exhaust ports* and empties
+  over about two hours. Leave the power off until it reads FULL: the burner starts gassing its room
+  and the toxic exhaust alert fires. Deconstruct a part-full tank: its gas comes out where it stood.
+  A compactor or factory machine on the same pipe also fills it while the port is off.
 - [ ] **Garbage compactor:** run exhaust pipe under a Vanilla Recycling Expanded garbage compactor
   to a powered port. While it compacts it reads *its toxic gas goes down the exhaust pipe to 1 exhaust
   ports*, and the gas comes out at the port instead of at its work spot. Without a port it reads *no

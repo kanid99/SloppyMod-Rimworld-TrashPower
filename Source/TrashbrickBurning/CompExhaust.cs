@@ -48,6 +48,60 @@ namespace TrashbrickBurning
             return ports;
         }
 
+        public static List<CompExhaustTank> Tanks(PipeNet net)
+        {
+            List<CompExhaustTank> tanks = new List<CompExhaustTank>();
+            if (net == null)
+            {
+                return tanks;
+            }
+            foreach (ThingWithComps thing in HeatNetwork.Members(net))
+            {
+                CompExhaustTank tank = thing.GetComp<CompExhaustTank>();
+                if (tank != null && tank.parent.Spawned)
+                {
+                    tanks.Add(tank);
+                }
+            }
+            return tanks;
+        }
+
+        /// <summary>
+        /// Exhaust with no open port to go to: as much as the expansion tanks on the network have room
+        /// for goes into them, and the refs are left holding what didn't fit.
+        /// </summary>
+        public static void Store(PipeNet net, ref float pollution, ref float gas, ref float rot)
+        {
+            foreach (CompExhaustTank tank in Tanks(net))
+            {
+                if (gas + rot <= 0.001f && pollution <= 0.001f)
+                {
+                    return;
+                }
+                tank.Take(ref pollution, ref gas, ref rot);
+            }
+        }
+
+        /// <summary>
+        /// Fumes from anything on the network (burner, compactor, factory machine): to the open ports,
+        /// else into the expansion tanks. True if all of it went somewhere; the refs keep what's left.
+        /// </summary>
+        public static bool Route(PipeNet net, ref float pollution, ref float gas, ref float rot, float heat)
+        {
+            List<CompExhaustPort> open = Ports(net);
+            if (open.Count > 0)
+            {
+                foreach (CompExhaustPort port in open)
+                {
+                    port.Receive(pollution / open.Count, gas / open.Count, heat / open.Count, rot / open.Count);
+                }
+                pollution = gas = rot = 0f;
+                return true;
+            }
+            Store(net, ref pollution, ref gas, ref rot);
+            return gas + rot < 0.5f;
+        }
+
         /// <summary>
         /// Toxic gas straight into the gas grid, overflowing: a cell holds at most 255, and without
         /// overflow everything past that is thrown away, so a steady stream into one cell never built
@@ -120,6 +174,7 @@ namespace TrashbrickBurning
         private float rotBuffer;
         private int ports;
         private bool ventingLocally;
+        private bool holdingInTank;
 
         public CompProperties_Exhaust Props => (CompProperties_Exhaust)props;
 
@@ -171,13 +226,10 @@ namespace TrashbrickBurning
             float gas = fuel * Props.toxGasPerFuel * mult * engine.mixToxGas;
             // Burnt corpses: rot stink, scaled off the same toxic gas figure.
             float rot = fuel * Props.toxGasPerFuel * mult * engine.mixRotStink;
-            if (open.Count > 0)
+            holdingInTank = false;
+            if (ExhaustNetwork.Route(ExhaustNetwork.NetOf(parent), ref pollution, ref gas, ref rot, fuel * Props.heatPerFuel))
             {
-                float heat = fuel * Props.heatPerFuel;
-                foreach (CompExhaustPort port in open)
-                {
-                    port.Receive(pollution / open.Count, gas / open.Count, heat / open.Count, rot / open.Count);
-                }
+                holdingInTank = open.Count == 0;
                 return;
             }
             ventingLocally = true;
@@ -253,6 +305,10 @@ namespace TrashbrickBurning
             if (ventingLocally)
             {
                 return "STB_ExhaustLocal".Translate(PollutionPerDay.ToString("0.#")).Resolve();
+            }
+            if (holdingInTank)
+            {
+                return "STB_ExhaustToTank".Translate().Resolve();
             }
             return "STB_ExhaustToPorts".Translate(ports, PollutionPerDay.ToString("0.#")).Resolve();
         }
@@ -378,23 +434,20 @@ namespace TrashbrickBurning
     /// </summary>
     public class CompExhaustSource : ThingComp
     {
-        /// <summary>Takes the toxic gas if it can: true if it went down the exhaust.</summary>
-        public bool TryRoute(int amount) => TryRoute(amount, 0f, 0f);
-
-        /// <summary>Sends fumes to the open ports, split evenly: true if there was one to take them.</summary>
-        public bool TryRoute(float toxGas, float rotStink, float pollution)
+        /// <summary>
+        /// Takes what toxic gas it can down the exhaust - to an open port, or into an expansion tank -
+        /// and returns what's left over to come out here.
+        /// </summary>
+        public int RouteGas(int amount)
         {
-            List<CompExhaustPort> open = ExhaustNetwork.Ports(ExhaustNetwork.NetOf(parent));
-            if (open.Count == 0)
-            {
-                return false;
-            }
-            foreach (CompExhaustPort port in open)
-            {
-                port.Receive(pollution / open.Count, toxGas / open.Count, 0f, rotStink / open.Count);
-            }
-            return true;
+            float pollution = 0f, gas = amount, rot = 0f;
+            ExhaustNetwork.Route(ExhaustNetwork.NetOf(parent), ref pollution, ref gas, ref rot, 0f);
+            return Mathf.CeilToInt(gas - 0.001f);
         }
+
+        /// <summary>Sends fumes down the exhaust: true if all of it went; the refs keep what's left.</summary>
+        public bool TryRoute(ref float toxGas, ref float rotStink, ref float pollution) =>
+            ExhaustNetwork.Route(ExhaustNetwork.NetOf(parent), ref pollution, ref toxGas, ref rotStink, 0f);
 
         public override string CompInspectStringExtra()
         {
@@ -488,7 +541,7 @@ namespace TrashbrickBurning
             }
             float f = (float)Interval / GenDate.TicksPerDay * TrashbrickBurningMod.S.pollutionMultiplier;
             float gas = Props.toxGasPerDay * f, rot = Props.rotStinkPerDay * f, pollution = Props.pollutionPerDay * f;
-            if (TryRoute(gas, rot, pollution))
+            if (TryRoute(ref gas, ref rot, ref pollution))
             {
                 return;
             }
@@ -511,6 +564,145 @@ namespace TrashbrickBurning
             string line = (working ? "STB_FumesWorking" : "STB_FumesIdle").Translate(what);
             string route = base.CompInspectStringExtra();
             return route.NullOrEmpty() ? line : line + "\n" + route;
+        }
+    }
+
+    public class CompProperties_ExhaustTank : CompProperties
+    {
+        /// <summary>Toxic gas (and rot stink) it holds: about eight hours of a trash gasifier on normal.</summary>
+        public float capacity = 30000f;
+
+        /// <summary>How fast it empties into open ports, a day: a full tank drains in about two hours.</summary>
+        public float drainPerDay = 360000f;
+
+        public CompProperties_ExhaustTank()
+        {
+            compClass = typeof(CompExhaustTank);
+        }
+    }
+
+    /// <summary>
+    /// The exhaust expansion tank: a buffer on the exhaust network. While no open, powered port can
+    /// take the exhaust - a power cut, every damper shut - the burners, compactors and factory
+    /// machines on the network fill it instead of gassing their rooms. Once a port is working again it
+    /// drains into the ports at a steady rate. Full, the exhaust backs up as before. Destroyed (or
+    /// deconstructed), it lets out everything it holds where it stood.
+    /// </summary>
+    public class CompExhaustTank : ThingComp
+    {
+        private const int Interval = GenTicks.TickRareInterval;
+
+        private float gas;
+        private float rot;
+        private float pollution;
+        private int draining;
+
+        public CompProperties_ExhaustTank Props => (CompProperties_ExhaustTank)props;
+
+        public float Held => gas + rot;
+
+        public float Room => Mathf.Max(0f, Props.capacity - Held);
+
+        public float Fraction => Props.capacity > 0f ? Held / Props.capacity : 0f;
+
+        public override void PostExposeData()
+        {
+            base.PostExposeData();
+            Scribe_Values.Look(ref gas, "heldGas", 0f);
+            Scribe_Values.Look(ref rot, "heldRot", 0f);
+            Scribe_Values.Look(ref pollution, "heldPollution", 0f);
+        }
+
+        /// <summary>Takes what it has room for, in proportion; the refs keep the rest.</summary>
+        public void Take(ref float p, ref float g, ref float r)
+        {
+            float incoming = g + r;
+            float share = incoming <= 0.001f ? 1f : Mathf.Min(1f, Room / incoming);
+            if (share <= 0f)
+            {
+                return;
+            }
+            gas += g * share;
+            rot += r * share;
+            pollution += p * share;
+            g -= g * share;
+            r -= r * share;
+            p -= p * share;
+        }
+
+        public override void CompTick()
+        {
+            base.CompTick();
+            if (parent.IsHashIntervalTick(Interval))
+            {
+                Drain();
+            }
+        }
+
+        public override void CompTickRare()
+        {
+            base.CompTickRare();
+            Drain();
+        }
+
+        private void Drain()
+        {
+            draining = 0;
+            if (!parent.Spawned || Held <= 0.5f && pollution <= 0.01f)
+            {
+                return;
+            }
+            List<CompExhaustPort> open = ExhaustNetwork.Ports(ExhaustNetwork.NetOf(parent));
+            if (open.Count == 0)
+            {
+                return;
+            }
+            draining = open.Count;
+            float share = Held <= 0.5f ? 1f : Mathf.Min(1f, Props.drainPerDay * Interval / GenDate.TicksPerDay / Held);
+            float g = gas * share, r = rot * share, p = pollution * share;
+            gas -= g;
+            rot -= r;
+            pollution -= p;
+            foreach (CompExhaustPort port in open)
+            {
+                port.Receive(p / open.Count, g / open.Count, 0f, r / open.Count);
+            }
+        }
+
+        public override void PostDestroy(DestroyMode mode, Map previousMap)
+        {
+            base.PostDestroy(mode, previousMap);
+            if (previousMap == null || Held <= 0.5f)
+            {
+                return;
+            }
+            // Burst or taken apart: everything in it comes out at once.
+            IntVec3 cell = parent.Position;
+            ExhaustNetwork.AddGas(cell, previousMap, GasType.ToxGas, (int)gas);
+            ExhaustNetwork.AddGas(cell, previousMap, GasType.RotStink, (int)rot);
+            if (pollution >= 1f && ModsConfig.BiotechActive && cell.InBounds(previousMap))
+            {
+                PollutionUtility.GrowPollutionAt(cell, previousMap, (int)pollution);
+            }
+            gas = rot = pollution = 0f;
+        }
+
+        public override string CompInspectStringExtra()
+        {
+            string s = "STB_TankHeld".Translate(Held.ToString("0"), Props.capacity.ToString("0"), Fraction.ToStringPercent());
+            if (ExhaustNetwork.NetOf(parent) == null)
+            {
+                return s + "\n" + "STB_TankNoPipe".Translate();
+            }
+            if (draining > 0)
+            {
+                return s + "\n" + "STB_TankDraining".Translate(draining);
+            }
+            if (Held > 0.5f)
+            {
+                return s + "\n" + (Room <= 1f ? "STB_TankFull" : "STB_TankHolding").Translate();
+            }
+            return s;
         }
     }
 }

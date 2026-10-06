@@ -257,4 +257,58 @@
 		</researchPrerequisites>
 	</ThingDef>
 
+	<!--
+		The exhaust expansion tank: a buffer for when no port can take the exhaust - a power cut, every
+		damper shut. Everything on the network fills it instead of gassing its room; it drains into the
+		ports once one works again (CompExhaustTank).
+	-->
+	<ThingDef ParentName="BuildingBase">
+		<defName>STB_ExhaustTank</defName>
+		<label>exhaust expansion tank</label>
+		<description>A sealed tank on the exhaust network that holds the exhaust when no exhaust port can take it - a power cut that stops the ports' draught fans, or every damper shut. While it has room, the burners, garbage compactors and factory machines on the network fill it instead of backing their fumes up into their rooms. It holds about 30,000 toxic gas - roughly eight hours of a trash gasifier on normal - and once a port is working again it drains into the ports over about two hours. When it's full, the exhaust backs up as before. If it's destroyed or taken apart, everything inside comes out at once. Run an exhaust pipe under it to connect it.</description>
+		<thingClass>Building</thingClass>
+		<graphicData>
+			<texPath>Things/Building/Power/STB_ExhaustTank</texPath>
+			<graphicClass>Graphic_Single</graphicClass>
+			<drawSize>(3,3)</drawSize>
+		</graphicData>
+		<altitudeLayer>Building</altitudeLayer>
+		<passability>PassThroughOnly</passability>
+		<pathCost>150</pathCost>
+		<fillPercent>0.9</fillPercent>
+		<blockWind>true</blockWind>
+		<castEdgeShadows>false</castEdgeShadows>
+		<rotatable>false</rotatable>
+		<size>(2,2)</size>
+		<tickerType>Rare</tickerType>
+		<statBases>
+			<MaxHitPoints>250</MaxHitPoints>
+			<WorkToBuild>2000</WorkToBuild>
+			<Flammability>0</Flammability>
+			<Beauty>-12</Beauty>
+		</statBases>
+		<costList>
+			<Steel>120</Steel>
+			<ComponentIndustrial>1</ComponentIndustrial>
+		</costList>
+		<comps>
+			<li Class="PipeSystem.CompProperties_Resource">
+				<pipeNet>STB_ExhaustNet</pipeNet>
+			</li>
+			<li Class="TrashbrickBurning.CompProperties_ExhaustTank">
+				<capacity>30000</capacity>
+				<drainPerDay>360000</drainPerDay>
+			</li>
+			<!-- Build buttons for every other building in the mod (CompBuildShortcuts). -->
+			<li Class="TrashbrickBurning.CompProperties_BuildShortcuts"/>
+		</comps>
+		<terrainAffordanceNeeded>Medium</terrainAffordanceNeeded>
+		<designationCategory>Power</designationCategory>
+		<constructEffect>ConstructMetal</constructEffect>
+		<researchPrerequisites>
+			<li>Electricity</li>
+			<li>VRecyclingE_ComplexRecycling</li>
+		</researchPrerequisites>
+	</ThingDef>
+
 </Defs>

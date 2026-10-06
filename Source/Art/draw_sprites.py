@@ -1128,6 +1128,37 @@ def heat_accumulator():
     c.save(f"{OUT}/Things/Building/Power/STB_HeatAccumulator.png")
 
 
+def exhaust_tank():
+    """2x2 at drawSize 3. The exhaust expansion tank: the Overpressure Tank's round form, but
+    sooty steel with a hazard band near the top, a soot-black exhaust inlet in place of the
+    orange hot-water one, and a pressure gauge."""
+    v = View("south", 2, 2, MARGIN_2X2)
+    c = Canvas(v)
+    skid(c, shade(STEEL, 0.55), chamfer=0.22)
+    soot = (62, 60, 58)
+    c.pipe(0.12, 0.3, 0.12, 1.0, 0.07, 0.1, soot)
+    c.pipe(0.12, 1.0, 0.4, 1.0, 0.07, 0.1, soot)
+
+    def cap(X, Y, R):
+        # A domed cap: a hazard ring of yellow and black blocks round a dark relief valve.
+        for k in range(16):
+            a0 = k * 2 * math.pi / 16
+            col = (214, 176, 52) if k % 2 == 0 else (40, 38, 36)
+            pts = [(X, Y - R // 10)]
+            for t in range(5):
+                ang = a0 + t * (2 * math.pi / 16) / 4
+                pts.append((X + math.cos(ang) * R * 0.78, Y - R // 10 + math.sin(ang) * R * 0.78))
+            c.d.polygon(pts, fill=col + (255,))
+        r = int(R * 0.58)
+        c.d.ellipse([X - r, Y - r - R // 10, X + r, Y + r - R // 10], fill=(108, 104, 98, 255))
+        rv = max(3, c.px(0.07))
+        c.d.ellipse([X - rv, Y - rv - R // 10, X + rv, Y + rv - R // 10], fill=(46, 44, 42, 255))
+    c.cylinder(1.02, 0.98, 0.78, 0.07, 0.62, (118, 114, 106), wall=(84, 80, 74), rings=3, cap_fn=cap)
+    gauge(c, 1.72, 0.3, 0.07)
+    c.flush()
+    c.save(f"{OUT}/Things/Building/Power/STB_ExhaustTank.png")
+
+
 def fire_glow():
     """The firebox flicker's texture: a soft orange blob, no silhouette. CompMachineEffects draws it
     with the MoteGlow shader at a flickering strength."""
@@ -1504,6 +1535,7 @@ if __name__ == "__main__":
     hot_water_radiator()
     cobbled_radiator()
     heat_accumulator()
+    exhaust_tank()
     fire_glow()
     turbine_rotor()
     pellets()
