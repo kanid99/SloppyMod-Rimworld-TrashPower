@@ -109,6 +109,11 @@ God mode on, then build a **cobbled trash gasifier**. Give it trashbricks (debug
   With **chemfuel**: x1.5 / x0.6.
 - [ ] **Sync burners** copies the fuel bill (filter and radius). An old save whose burner had *Accept
   wastepacks* off loads with wastepacks refused in its fuel bill.
+- [ ] **Jets:** a steam vent blowing shows a jet of white steam out of its outlet - wall vent straight
+  out from the wall, ground vent towards its facing cell - small at a few hundred watts, a strong jet
+  at 3000W, and nothing when idle. An exhaust port with burners on it shows a yellow-green jet (stack:
+  rising from the top; wall port: out from the wall), bigger with more burners or dirtier fuel, browner
+  when corpses burn, and stopping within a few seconds when the burners stop or the port loses power.
 - [ ] **Visible steam:** in a closed room, set a steam vent (or an Overpressure Tank's auto-release) blowing.
   A white fog spreads out from it and fills the room within a minute or two, churning slowly; the
   room heats much faster than before and levels off around 100°C. Open a door: the fog drifts

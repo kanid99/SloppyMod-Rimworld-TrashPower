@@ -21,4 +21,22 @@
 		<growthRate>0.12</growthRate>
 	</FleckDef>
 
+	<!--
+		A jet puff (GasJet): shot out of a steam vent or exhaust port, fast and small, swelling quickly
+		as it slows and fades - so a stream of them reads as a plume. Tinted per jet: white steam,
+		yellow-green toxic exhaust, brown rot stink.
+	-->
+	<FleckDef ParentName="FleckBase_Thrown">
+		<defName>STB_JetPuff</defName>
+		<graphicData>
+			<texPath>Things/Gas/STB_Steam</texPath>
+			<renderInstanced>true</renderInstanced>
+		</graphicData>
+		<altitudeLayer>MoteOverhead</altitudeLayer>
+		<fadeInTime>0.04</fadeInTime>
+		<solidTime>0.25</solidTime>
+		<fadeOutTime>1.1</fadeOutTime>
+		<growthRate>1.4</growthRate>
+	</FleckDef>
+
 </Defs>

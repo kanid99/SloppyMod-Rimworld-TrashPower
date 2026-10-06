@@ -108,6 +108,7 @@ Burning trash makes exhaust, in both play modes. It has to go somewhere:
 | Conveyor crematorium | 10,000, plus 20,000 rot stink | 0.5 cells |
 
 The clean machines (autoloom, masonry saw, mincer, conveyor oven, assembler, distillery, machining bay) make none.
+- **Jets:** steam vents and exhaust ports blow a visible jet, sized to what's coming through. A steam vent's jet of white steam grows with the watts it's venting. An exhaust port's jet of yellow-green fumes grows with the toxic gas it's letting out, browner with rot stink from burnt corpses. A wall vent or wall port blows straight out from the wall; the stack sends a plume up from its top.
 - **At the port:** exhaust comes out as toxic gas (it drifts off outdoors, and builds up fast in a closed room), a little heat, and ground pollution.
 - **No exhaust pipe to an open port:** the burner lets its exhaust out around itself - **toxic gas** into the cells around it, and pollution on the ground there. Its readout says *EXHAUST* in capitals and a **Burner venting toxic exhaust** alert fires.
 - **How much:** by fuel burnt. Every burner, on every mode, makes more toxic gas than a working garbage compactor - burning trash is dirtier than crushing it. The trash gasifier's filters cut the ground pollution to a third; the gas only a little. A settings slider scales it.

@@ -142,7 +142,8 @@
 		<castEdgeShadows>false</castEdgeShadows>
 		<rotatable>false</rotatable>
 		<size>(1,1)</size>
-		<tickerType>Rare</tickerType>
+		<!-- Normal, for its jet of fumes. -->
+		<tickerType>Normal</tickerType>
 		<statBases>
 			<MaxHitPoints>120</MaxHitPoints>
 			<WorkToBuild>500</WorkToBuild>
@@ -207,7 +208,8 @@
 		<castEdgeShadows>false</castEdgeShadows>
 		<rotatable>true</rotatable>
 		<size>(1,1)</size>
-		<tickerType>Rare</tickerType>
+		<!-- Normal, for its jet of fumes. -->
+		<tickerType>Normal</tickerType>
 		<clearBuildingArea>false</clearBuildingArea>
 		<statBases>
 			<MaxHitPoints>120</MaxHitPoints>

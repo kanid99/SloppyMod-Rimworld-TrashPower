@@ -340,6 +340,16 @@ namespace TrashbrickBurning
         private float receivedToday;
         private int lastReceiveTick = -1;
 
+        // The jet: gas and rot stink received this window, and the rate over the last one.
+        private float windowGas;
+        private float windowRot;
+        private float gasPerDay;
+        private float rotShare;
+        private readonly GasJet jet = new GasJet();
+
+        /// <summary>Toxic gas a day at which the jet blows full: about a cobbled gasifier on high.</summary>
+        private const float FullJetGasPerDay = 150000f;
+
         /// <summary>
         /// Its fan has to run to draw the exhaust: switched on and powered. With no open port, the
         /// exhaust backs up and comes out of the burners (and compactors) that make it.
@@ -378,6 +388,8 @@ namespace TrashbrickBurning
             pollutionBuffer += pollution;
             gasBuffer += gas;
             rotBuffer += rot;
+            windowGas += gas;
+            windowRot += rot;
             receivedToday = pollution * GenDate.TicksPerDay / GenTicks.TickRareInterval;
             lastReceiveTick = Find.TickManager.TicksGame;
             IntVec3 cell = Outlet ?? parent.Position;
@@ -386,6 +398,38 @@ namespace TrashbrickBurning
                 GenTemperature.PushHeat(cell, parent.Map, heat);
             }
             CompExhaust.Emit(parent, Outlet, ref pollutionBuffer, ref gasBuffer, ref rotBuffer);
+        }
+
+        /// <summary>
+        /// A jet of fumes out of the port, scaled to how much is coming through: yellow-green toxic
+        /// exhaust, browner the more rot stink is in it. A wall port blows straight out from the wall;
+        /// the stack sends a plume up from its top.
+        /// </summary>
+        public override void CompTick()
+        {
+            base.CompTick();
+            if (parent.IsHashIntervalTick(GenTicks.TickRareInterval))
+            {
+                float total = windowGas + windowRot;
+                gasPerDay = total * GenDate.TicksPerDay / GenTicks.TickRareInterval;
+                rotShare = total > 0f ? windowRot / total : 0f;
+                windowGas = windowRot = 0f;
+            }
+            if (!parent.Spawned || gasPerDay <= 0f || !parent.IsHashIntervalTick(GasJet.TickInterval))
+            {
+                return;
+            }
+            Color color = Color.Lerp(GasJet.ToxGas, GasJet.RotStink, rotShare);
+            float strength = gasPerDay / FullJetGasPerDay;
+            if (Props.outletAtSelf)
+            {
+                jet.Tick(parent.Map, parent.DrawPos, parent.Rotation.Opposite.AsAngle, strength, color);
+            }
+            else
+            {
+                Vector3 top = parent.DrawPos + new Vector3(0f, 0f, 0.45f);
+                jet.Tick(parent.Map, top, 0f, strength, color, 18f);
+            }
         }
 
         public override void PostDrawExtraSelectionOverlays()

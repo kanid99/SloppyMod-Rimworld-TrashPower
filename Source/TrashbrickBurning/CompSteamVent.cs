@@ -80,9 +80,26 @@ namespace TrashbrickBurning
             Scribe_Values.Look(ref drainLevel, "drainLevel", 1);
         }
 
+        private readonly GasJet jet = new GasJet();
+
+        /// <summary>
+        /// The jet of steam it blows, scaled to what it's venting: a wall vent straight out from the
+        /// wall, a ground vent towards the cell it faces.
+        /// </summary>
+        private void TickJet()
+        {
+            if (venting <= 1f || !parent.Spawned || !parent.IsHashIntervalTick(GasJet.TickInterval))
+            {
+                return;
+            }
+            Rot4 dir = Props.plumeAtSelf ? parent.Rotation.Opposite : parent.Rotation;
+            jet.Tick(parent.Map, parent.DrawPos, dir.AsAngle, venting / Props.maxWatts, GasJet.Steam);
+        }
+
         public override void CompTick()
         {
             base.CompTick();
+            TickJet();
             if (!parent.IsHashIntervalTick(60))
             {
                 return;
