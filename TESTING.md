@@ -84,6 +84,10 @@ God mode on, then build a **cobbled trash gasifier**. Give it trashbricks (debug
   Trashbricks only, the fuel filter tree (search box, categories, rotten/fresh corpse filters) and a
   list of fuel values. Refuse wastepacks: with wastepacks and bricks both lying around, colonists
   refuel with bricks only, and a hopper full of wastepacks doesn't feed it. Allow hay: it gets fed hay.
+- [ ] **Radius ring:** drag the fuel bill's search radius slider: a ring follows it on the map. Select
+  the burner later: the ring shows while it's selected. At Unlimited: no ring.
+- [ ] **Copy / paste:** copy a burner's fuel bill (its button, or the icon in the bill window), select
+  three other burners - including a large one - and paste: all three get the same fuels and radius.
 - [ ] **Search radius:** set it to 10 with bricks only 20 cells away: nobody refuels it and it reads
   out of fuel. Move bricks within 10 cells, or set the radius back to Unlimited: it gets refuelled.
 - [ ] **Corpses:** allow humanlike corpses in the fuel bill. A colonist hauls a raider corpse to the burner; its

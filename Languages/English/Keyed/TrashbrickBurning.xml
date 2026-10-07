@@ -160,4 +160,10 @@
 	<STB_TankDraining>Draining into {0} exhaust ports.</STB_TankDraining>
 	<STB_TankHolding>Holding: no open, powered exhaust port to drain into.</STB_TankHolding>
 	<STB_TankFull>FULL: exhaust is backing up into the burners.</STB_TankFull>
+	<STB_FuelBillCopy>Copy fuel bill</STB_FuelBillCopy>
+	<STB_FuelBillCopyDesc>Copy this burner's fuel bill - its allowed fuels and search radius - to paste onto other burners.</STB_FuelBillCopyDesc>
+	<STB_FuelBillPaste>Paste fuel bill</STB_FuelBillPaste>
+	<STB_FuelBillPasteDesc>Paste the copied fuel bill onto this burner: its allowed fuels and search radius. Select several burners to paste onto all of them.</STB_FuelBillPasteDesc>
+	<STB_FuelBillNothingCopied>No fuel bill copied yet.</STB_FuelBillNothingCopied>
+	<STB_FuelBillCopied>Fuel bill copied.</STB_FuelBillCopied>
 </LanguageData>

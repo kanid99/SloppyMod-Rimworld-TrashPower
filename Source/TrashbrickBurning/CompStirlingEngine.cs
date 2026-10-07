@@ -511,13 +511,37 @@ namespace TrashbrickBurning
             return (at - parent.Position).LengthHorizontalSquared <= searchRadius * searchRadius;
         }
 
+        /// <summary>
+        /// The fuel bill's search radius as a ring on the map, like a bill's ingredient search radius:
+        /// while the bill is open, and whenever the burner is selected. Nothing when it's unlimited, or
+        /// too wide for the game to draw.
+        /// </summary>
+        public void DrawSearchRadius()
+        {
+            if (parent.Spawned && parent.Map == Find.CurrentMap && searchRadius < AnyDistance
+                && searchRadius < GenRadial.MaxRadialPatternRadius)
+            {
+                GenDraw.DrawRadiusRing(parent.Position, searchRadius);
+            }
+        }
+
+        public override void PostDrawExtraSelectionOverlays()
+        {
+            base.PostDrawExtraSelectionOverlays();
+            DrawSearchRadius();
+        }
+
         /// <summary>Copies another burner's fuel bill.</summary>
-        public void CopyFuelBill(CompStirlingEngine source)
+        public void CopyFuelBill(CompStirlingEngine source) =>
+            SetFuelBill(source.fuelFilter, source.searchRadius, source.knownFuels);
+
+        /// <summary>Sets the fuel bill from a filter, radius and known-fuels list (Sync burners, the clipboard).</summary>
+        public void SetFuelBill(ThingFilter filter, float radius, List<string> known)
         {
             fuelFilter = fuelFilter ?? new ThingFilter();
-            fuelFilter.CopyAllowancesFrom(source.fuelFilter);
-            searchRadius = source.searchRadius;
-            knownFuels = new List<string>(source.knownFuels ?? new List<string>());
+            fuelFilter.CopyAllowancesFrom(filter);
+            searchRadius = radius;
+            knownFuels = new List<string>(known ?? new List<string>());
             ApplyNewDefaults();
         }
 
@@ -698,6 +722,10 @@ namespace TrashbrickBurning
                 yield break;
             }
             yield return new Command_FuelBill(this);
+            foreach (Gizmo g in FuelBillClipboard.Gizmos(this))
+            {
+                yield return g;
+            }
             if (Advanced && DbhActive)
             {
                 yield return new Command_HotWaterShare(this);

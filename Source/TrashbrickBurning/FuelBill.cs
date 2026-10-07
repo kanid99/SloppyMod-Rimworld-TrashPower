@@ -20,6 +20,64 @@ namespace TrashbrickBurning
     }
 
     /// <summary>
+    /// Copy and paste for fuel bills, as vanilla has for bills and storage settings: copy one
+    /// burner's fuel filter and search radius, paste it onto others (any size of burner). From the
+    /// burner's buttons or the icons in the fuel bill window.
+    /// </summary>
+    public static class FuelBillClipboard
+    {
+        private static ThingFilter filter;
+        private static float radius;
+        private static List<string> known;
+
+        public static bool HasCopied => filter != null;
+
+        public static void Copy(CompStirlingEngine engine)
+        {
+            filter = new ThingFilter();
+            filter.CopyAllowancesFrom(engine.fuelFilter);
+            radius = engine.searchRadius;
+            known = new List<string>(engine.knownFuels ?? new List<string>());
+            Messages.Message("STB_FuelBillCopied".Translate(), MessageTypeDefOf.SilentInput, false);
+        }
+
+        public static void PasteInto(CompStirlingEngine engine)
+        {
+            if (HasCopied)
+            {
+                engine.SetFuelBill(filter, radius, known);
+            }
+        }
+
+        public static IEnumerable<Gizmo> Gizmos(CompStirlingEngine engine)
+        {
+            yield return new Command_Action
+            {
+                defaultLabel = "STB_FuelBillCopy".Translate(),
+                defaultDesc = "STB_FuelBillCopyDesc".Translate(),
+                icon = TexButton.Copy,
+                action = () => Copy(engine),
+                // Selecting several burners shows one copy button, not one each.
+                groupKey = 0x5b7c0f1
+            };
+            Command_Action paste = new Command_Action
+            {
+                defaultLabel = "STB_FuelBillPaste".Translate(),
+                defaultDesc = "STB_FuelBillPasteDesc".Translate(),
+                icon = TexButton.Paste,
+                action = () => PasteInto(engine),
+                // Grouped, so pasting with several burners selected pastes onto every one.
+                groupKey = 0x5b7c0f2
+            };
+            if (!HasCopied)
+            {
+                paste.Disable("STB_FuelBillNothingCopied".Translate());
+            }
+            yield return paste;
+        }
+    }
+
+    /// <summary>
     /// A burner's fuel bill, laid out like a vanilla bill: the ingredient search radius, and the
     /// fuel filter tree with its search box and special filters (rotten corpses and so on). Down the
     /// right, what each fuel is worth and how dirty it burns.
@@ -42,11 +100,35 @@ namespace TrashbrickBurning
             closeOnClickedOutside = true;
         }
 
+        /// <summary>The search radius on the map while the bill is open, as a vanilla bill does.</summary>
+        public override void WindowUpdate()
+        {
+            base.WindowUpdate();
+            engine.DrawSearchRadius();
+        }
+
         public override void DoWindowContents(Rect inRect)
         {
             Text.Font = GameFont.Medium;
             Widgets.Label(new Rect(0f, 0f, inRect.width, 35f), "STB_FuelBillTitle".Translate(engine.parent.LabelCap));
             Text.Font = GameFont.Small;
+
+            // Copy / paste, top right, as on a vanilla bill.
+            Rect copy = new Rect(inRect.width - 30f - 24f - 34f, 4f, 24f, 24f);
+            if (Widgets.ButtonImage(copy, TexButton.Copy))
+            {
+                FuelBillClipboard.Copy(engine);
+            }
+            TooltipHandler.TipRegion(copy, "STB_FuelBillCopyDesc".Translate());
+            Rect paste = new Rect(copy.xMax + 6f, 4f, 24f, 24f);
+            if (FuelBillClipboard.HasCopied)
+            {
+                if (Widgets.ButtonImage(paste, TexButton.Paste))
+                {
+                    FuelBillClipboard.PasteInto(engine);
+                }
+                TooltipHandler.TipRegion(paste, "STB_FuelBillPasteDesc".Translate());
+            }
 
             Rect left = new Rect(0f, 40f, 360f, inRect.height - 40f - CloseButSize.y - 10f);
             Rect right = new Rect(left.xMax + 17f, 40f, inRect.width - left.xMax - 17f, left.height);
