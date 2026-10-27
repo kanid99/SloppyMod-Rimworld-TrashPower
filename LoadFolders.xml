@@ -14,4 +14,11 @@
 		<li IfModActive="Dubwise.DubsBadHygiene">Mods/DubsBadHygiene/1.6</li>
 		<li IfModActive="VanillaExpanded.VFEFactory">Mods/VFEFactory</li>
 	</v1.6>
+	<v1.7>
+		<li>/</li>
+		<li>1.6</li>
+		<li IfModActive="Dubwise.DubsBadHygiene">Mods/DubsBadHygiene</li>
+		<li IfModActive="Dubwise.DubsBadHygiene">Mods/DubsBadHygiene/1.6</li>
+		<li IfModActive="VanillaExpanded.VFEFactory">Mods/VFEFactory</li>
+	</v1.7>
 </loadFolders>

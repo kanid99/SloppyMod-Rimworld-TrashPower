@@ -1,5 +1,5 @@
 # SloppyMod Trash POWER!
-A RimWorld mod (1.5 / 1.6) for burning trash bricks, and maybe more, for power.
+A RimWorld mod (1.5 / 1.6 / 1.7) for burning trash bricks, and maybe more, for power.
 
 ## Requirements
 - **Required:** Vanilla Expanded Framework (VRE already needs it; its PipeSystem runs the hot water network) and Harmony (VEF needs it too)
