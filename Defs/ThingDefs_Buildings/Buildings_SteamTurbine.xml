@@ -21,7 +21,9 @@
 		<overlayOptions>
 			<overlayColor>(0.80, 0.36, 0.22)</overlayColor>
 		</overlayOptions>
-		<noStorageAlert>true</noStorageAlert>
+		<!-- No VEF "no storage connected" alert: VEF only counts its own storage buildings, and this
+		     network never uses one - the Overpressure Tank and exhaust expansion tank are this mod's own. -->
+		<noStorageAlert>false</noStorageAlert>
 	</PipeSystem.PipeNetDef>
 
 	<ThingDef Name="STB_HotWaterPipeBase" ParentName="BuildingBase" Abstract="True">
