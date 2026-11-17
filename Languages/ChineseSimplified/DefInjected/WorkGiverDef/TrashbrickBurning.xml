@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- EN: bleed overpressure tanks -->
+	<STB_BleedAccumulator.label>给超压罐泄压</STB_BleedAccumulator.label>
+
+	<!-- EN: bleed -->
+	<STB_BleedAccumulator.verb>泄压</STB_BleedAccumulator.verb>
+
+	<!-- EN: bleeding pressure from -->
+	<STB_BleedAccumulator.gerund>正在泄压</STB_BleedAccumulator.gerund>
+
+</LanguageData>

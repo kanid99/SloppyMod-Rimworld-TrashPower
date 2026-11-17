@@ -1,0 +1,350 @@
+[
+ {
+  "where": "main",
+  "type": "PipeSystem.PipeNetDef",
+  "path": "STB_HotWaterNet.resource.name",
+  "en": "Pressurised hot water"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HotWaterPipe.label",
+  "en": "pressurised hot water pipe"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HotWaterPipe.description",
+  "en": "Lagged, pressure-rated pipe that carries superheated water from trash gasifiers to a steam turbine. Can be placed under walls and other buildings."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HotWaterPipeHidden.label",
+  "en": "hidden pressurised hot water pipe"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HotWaterPipeHidden.description",
+  "en": "Pressurised hot water pipe buried out of sight. Can be placed under walls and other buildings."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HotWaterValve.label",
+  "en": "pressurised hot water valve"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HotWaterValve.description",
+  "en": "Opens or closes a pressurised hot water line, to split stoves between turbines or cut a turbine off."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_CobbledTurbine.label",
+  "en": "cobbled steam turbine"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_CobbledTurbine.description",
+  "en": "A steam turbine pieced together from scrap plate and a salvaged generator, driven by pressurised hot water from trash gasifiers. It takes up to 4800W of heat. Three gears: low turns over on 500W at 50%, medium needs 1500W for 60%, high needs 3000W for 70%. Below its gear's minimum it stalls, wasting the heat. It rattles, and breaks down often. With a turbine on the network, the burners' own Stirling engines stand down. Connect it with a pressurised hot water pipe under it."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_SteamTurbine.label",
+  "en": "steam turbine"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_SteamTurbine.description",
+  "en": "A compact steam turbine and generator, driven by pressurised hot water from trash gasifiers. It takes up to 6000W of heat - three gasifiers on high. Three gears: low turns over on 500W at 60%, medium needs 1500W for 70%, high needs 3000W for 80%. Below its gear's minimum it stalls, wasting the heat. With a turbine on the network, the burners' own Stirling engines stand down. Connect it with a pressurised hot water pipe under it."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HotWaterRadiator.label",
+  "en": "hot water radiator"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HotWaterRadiator.description",
+  "en": "A cast radiator that heats its room with pressurised hot water from trash gasifiers, up to the temperature you set. Radiators get the heat the steam turbines on their network leave over, then draw on the Overpressure Tank. Connect it by running a pressurised hot water pipe under it."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_CobbledRadiator.label",
+  "en": "cobbled radiator"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_CobbledRadiator.description",
+  "en": "A radiator knocked together from three lengths of salvaged pipe, lashed with wire and propped on timber. It heats its room with pressurised hot water from trash gasifiers, up to the temperature you set - just not much, and its joints weep steam more often than a proper radiator's. Radiators get the heat the steam turbines on their network leave over, then draw on the Overpressure Tank. Connect it by running a pressurised hot water pipe under it."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HeatAccumulator.label",
+  "en": "overpressure tank"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_HeatAccumulator.description",
+  "en": "An insulated tank that takes the heat the turbines and radiators don't use, so the burners don't build pressure. It feeds radiators from what it holds, and tops a stalling turbine up to its gear's minimum when the burners fall short - through a breakdown or a refuel. With Dubs Bad Hygiene it also feeds the plumbing's hot water tanks and radiators. The fuller it is, the likelier it is to explode: have a colonist bleed it now and then, or set it to auto-release above a level, which vents the heat into its room."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_SteamVent.label",
+  "en": "wall steam vent"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_SteamVent.description",
+  "en": "A louvred steam vent hung on a wall. It blows off the heat nobody else on its pressurised hot water network wants - after the turbines, radiators and Overpressure Tanks - so the burners don't build pressure, and it can drain the tanks above a level you set. Up to 3000W comes out as scalding steam on the side of the wall it hangs on: hang it outside. Inside, it heats the room fast, and anyone standing under it gets burned. Its valve shuts it. Run a pressurised hot water pipe to the cell it hangs over - pipe can go under the wall."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_SteamVentGround.label",
+  "en": "steam vent"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_SteamVentGround.description",
+  "en": "A standpipe steam vent: a pressurised hot water pipe turned up out of the ground under a louvred cap. It blows off the heat nobody else on its network wants - after the turbines, radiators and Overpressure Tanks - so the burners don't build pressure, and it can drain the tanks above a level you set. Up to 3000W comes out as scalding steam around it: build it outside. Indoors, it heats the room fast, and anyone passing through gets burned. Its valve shuts it. Run a pressurised hot water pipe under it."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_TrashbrickPelletStove.label",
+  "en": "cobbled trash gasifier"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_TrashbrickPelletStove.description",
+  "en": "A trash gasifier cobbled together from scrap plate and a salvaged Stirling engine, burning compressed trashbricks. It has three modes: eco gets the most heat from each brick, high the most heat. With no steam turbine on its pressurised hot water network, its Stirling engine makes a little power (75-300W) from three times that in heat; the rest of its heat goes out on the pipe, so it still needs an Overpressure Tank or radiators, or its pressure builds - and with no safety valve, it bursts. It breaks down often. Refill it by hand, or put a hopper on its intake - the green-marked port on the side it faces - and it will draw fuel from that. It heats the room while it runs. Its exhaust must be piped to an exhaust port, or it fills the room around it with toxic gas."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_TrashbrickPelletStove.comps.CompProperties_Refuelable.fuelLabel",
+  "en": "Trashbricks"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_TrashbrickGasifier.label",
+  "en": "trash gasifier"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_TrashbrickGasifier.description",
+  "en": "A sealed trash gasifier that bakes trashbricks into syngas and burns it cleanly: 1500W of heat on 75 bricks a day in normal mode, 750W on 30 in eco, 2000W on 112 in high. With no steam turbine on its pressurised hot water network, its Stirling engine makes some power (100-500W) from three times that in heat; the rest goes out on the pipe to an Overpressure Tank or radiators. A safety valve vents any pressure left over. Its catalytic filters cut the ground pollution to a third of a cobbled burner's, though the exhaust still needs piping away. The housing is insulated, so it leaks only a little heat. Refill it by hand, or put a hopper on its intake - the green-marked port on the side it faces - and it will draw fuel from that."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_TrashbrickGasifier.comps.CompProperties_Refuelable.fuelLabel",
+  "en": "Trashbricks"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_LargeCobbledStove.label",
+  "en": "large cobbled trash gasifier"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_LargeCobbledStove.description",
+  "en": "A long firebox welded together from whatever plate was lying around, a scrapped boiler drum, two mismatched flues and a salvaged generator, all on compressed trashbricks. Three times the heat of a cobbled trash gasifier from a little less fuel per watt, and just as short of a safety valve. It has no engine of its own: pipe it to a steam turbine. Refill it by hand, or put a hopper on its intake - the green-marked port on the side it faces - and it will draw fuel from that. It heats the room while it runs. Its exhaust must be piped to an exhaust port, or it fills the room around it with toxic gas."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_LargeCobbledStove.comps.CompProperties_Refuelable.fuelLabel",
+  "en": "Trashbricks"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_LargeGasifier.label",
+  "en": "large trash gasifier"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_LargeGasifier.description",
+  "en": "A bigger sealed gasifier: one large chamber, a longer filter bank and its own generator. Three times the heat of a trash gasifier from a little less fuel per watt - at full burn, enough to run one steam turbine flat out. Like the small one it bakes trashbricks into syngas and burns it cleanly, but it has no engine of its own: pipe it to a steam turbine. Its catalytic filters cut the ground pollution to a third of a cobbled burner's, though the exhaust still needs piping away. The housing is insulated, so it leaks only a little heat. Refill it by hand, or put a hopper on its intake - the green-marked port on the side it faces - and it will draw fuel from that."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_LargeGasifier.comps.CompProperties_Refuelable.fuelLabel",
+  "en": "Trashbricks"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_IndustrialGasifier.label",
+  "en": "industrial trash gasifier"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_IndustrialGasifier.description",
+  "en": "A plant-scale gasifier: two chambers in series, a double filter bank, twin exhaust stacks and a full-size generator on one long skid. Six times the heat of a trash gasifier and the most out of every brick - a fifth less fuel per watt - at full burn, enough to run two steam turbines flat out. Like the small one it burns clean. It has no engine of its own: pipe it to steam turbines. Its catalytic filters cut the ground pollution to a third of a cobbled burner's, though the exhaust still needs piping away. The housing is insulated, so it leaks only a little heat. Refill it by hand, or put a hopper on its intake - the green-marked port on the side it faces - and it will draw fuel from that."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_IndustrialGasifier.comps.CompProperties_Refuelable.fuelLabel",
+  "en": "Trashbricks"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_FuelHopper.label",
+  "en": "fuel hopper"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_FuelHopper.description",
+  "en": "A hopper for trashbrick fuel. Build it on a trash gasifier's intake - the green-marked port - with its spout toward the machine, and the machine pulls fuel from it as it burns. Haulers or a conveyor belt can fill it. It holds up to three stacks."
+ },
+ {
+  "where": "main",
+  "type": "PipeSystem.PipeNetDef",
+  "path": "STB_ExhaustNet.resource.name",
+  "en": "Exhaust"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustPipe.label",
+  "en": "exhaust pipe"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustPipe.description",
+  "en": "Sooty flue pipe that carries exhaust from trash gasifiers to an exhaust port. Can be placed under walls and other buildings."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustPipeHidden.label",
+  "en": "hidden exhaust pipe"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustPipeHidden.description",
+  "en": "Exhaust pipe buried out of sight. Can be placed under walls and other buildings."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustPort.label",
+  "en": "exhaust port"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustPort.description",
+  "en": "A soot-blackened stack where the exhaust network lets out the fumes of burning trash. The ground around it slowly fills with pollution. Build it outdoors: indoors, it fills the room with toxic gas instead. With several ports on one network, the exhaust is split between them. Its damper closes it. Its draught fan needs power (80W): unpowered, it can't draw the exhaust and the fumes back up and come out around the burners. Run an exhaust pipe under it to connect it. A garbage compactor on the same exhaust network sends its fumes here too."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustPortWall.label",
+  "en": "wall exhaust port"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustPortWall.description",
+  "en": "An exhaust duct hung on a wall. It blows the fumes of burning trash out on the side of the wall it's hung on: toxic gas, a little heat, and pollution slowly spreading over the ground below it. Hang it on the outside of a wall - on the inside it fills the room with toxic gas. With several ports on one network, the exhaust is split between them. Its damper closes it. Its draught fan needs power (80W): unpowered, it can't draw the exhaust and the fumes back up and come out around the burners. Run an exhaust pipe to the cell it hangs over - pipe can go under the wall. A garbage compactor on the same exhaust network sends its fumes here too."
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustTank.label",
+  "en": "exhaust expansion tank"
+ },
+ {
+  "where": "main",
+  "type": "ThingDef",
+  "path": "STB_ExhaustTank.description",
+  "en": "A sealed tank on the exhaust network that holds the exhaust when no exhaust port can take it - a power cut that stops the ports' draught fans, or every damper shut. While it has room, the burners, garbage compactors and factory machines on the network fill it instead of backing their fumes up into their rooms. It holds about 30,000 toxic gas - roughly eight hours of a trash gasifier on normal - and once a port is working again it drains into the ports over about two hours. When it's full, the exhaust backs up as before. If it's destroyed or taken apart, everything inside comes out at once. Run an exhaust pipe under it to connect it."
+ },
+ {
+  "where": "main",
+  "type": "JobDef",
+  "path": "STB_BleedAccumulator.reportString",
+  "en": "bleeding pressure from TargetA."
+ },
+ {
+  "where": "main",
+  "type": "WorkGiverDef",
+  "path": "STB_BleedAccumulator.label",
+  "en": "bleed overpressure tanks"
+ },
+ {
+  "where": "main",
+  "type": "WorkGiverDef",
+  "path": "STB_BleedAccumulator.verb",
+  "en": "bleed"
+ },
+ {
+  "where": "main",
+  "type": "WorkGiverDef",
+  "path": "STB_BleedAccumulator.gerund",
+  "en": "bleeding pressure from"
+ },
+ {
+  "where": "dbh",
+  "type": "ThingDef",
+  "path": "STB_SludgePellets.label",
+  "en": "sludge pellets"
+ },
+ {
+  "where": "dbh",
+  "type": "ThingDef",
+  "path": "STB_SludgePellets.description",
+  "en": "Fecal sludge that has been dried, pressed and baked into hard fuel pellets for a trash gasifier. Pellets give less energy than refining the sludge into chemfuel, but they don't explode when damaged, burn slowly, and don't rot."
+ },
+ {
+  "where": "dbh",
+  "type": "RecipeDef",
+  "path": "STB_Make_SludgePellets.label",
+  "en": "make sludge pellets"
+ },
+ {
+  "where": "dbh",
+  "type": "RecipeDef",
+  "path": "STB_Make_SludgePellets.description",
+  "en": "Dry and press fecal sludge into stable fuel pellets for a trash gasifier."
+ },
+ {
+  "where": "dbh",
+  "type": "RecipeDef",
+  "path": "STB_Make_SludgePellets.jobString",
+  "en": "Pressing sludge pellets."
+ }
+]

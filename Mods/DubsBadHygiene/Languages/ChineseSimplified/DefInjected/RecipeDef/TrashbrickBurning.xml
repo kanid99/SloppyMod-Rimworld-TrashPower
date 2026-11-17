@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- EN: make sludge pellets -->
+	<STB_Make_SludgePellets.label>制作污泥颗粒</STB_Make_SludgePellets.label>
+
+	<!-- EN: Dry and press fecal sludge into stable fuel pellets for a trash gasifier. -->
+	<STB_Make_SludgePellets.description>把粪便污泥干燥压制成稳定的燃料颗粒，供垃圾气化炉使用。</STB_Make_SludgePellets.description>
+
+	<!-- EN: Pressing sludge pellets. -->
+	<STB_Make_SludgePellets.jobString>正在压制污泥颗粒。</STB_Make_SludgePellets.jobString>
+
+</LanguageData>

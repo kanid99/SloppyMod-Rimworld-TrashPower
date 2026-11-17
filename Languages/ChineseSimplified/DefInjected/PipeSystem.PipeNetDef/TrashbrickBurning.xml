@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- EN: Pressurised hot water -->
+	<STB_HotWaterNet.resource.name>高压热水</STB_HotWaterNet.resource.name>
+
+	<!-- EN: Exhaust -->
+	<STB_ExhaustNet.resource.name>废气</STB_ExhaustNet.resource.name>
+
+</LanguageData>

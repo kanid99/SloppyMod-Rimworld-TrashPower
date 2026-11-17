@@ -185,9 +185,14 @@ The large and industrial burners join DBH plumbing too, with boilers of 4800 and
 
 Works with DBH's Lite mode too: that's a setting inside DBH, not a separate mod.
 
+## Translations
+- **English** (the original) and **Simplified Chinese / 简体中文** (`Languages/ChineseSimplified/`, plus `Mods/DubsBadHygiene/Languages/ChineseSimplified/` for the sludge pellets). The Chinese is a first translation, not a native speaker's: corrections are welcome.
+- A translation is a `Languages/<Language>/` folder: `Keyed/` for the mod's own text (readouts, alerts, settings, buttons) and `DefInjected/` for building and item names and descriptions. Anything missing falls back to English. When English text changes, the translations need the same change.
+
 ## Layout
 ```
 About/                                   metadata, preview, icon
+Languages/                               English and Simplified Chinese (Keyed text, DefInjected names and descriptions)
 LoadFolders.xml                          loads Mods/<mod> only when that mod is active
 Defs/ThingDefs_Buildings/                both machines, the fuel hopper, the hot water network, pipes, valve and turbine
 1.5/, 1.6/Assemblies/                    TrashbrickBurning.dll

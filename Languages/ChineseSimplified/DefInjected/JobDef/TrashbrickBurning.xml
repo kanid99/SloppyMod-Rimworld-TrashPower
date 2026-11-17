@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- EN: bleeding pressure from TargetA. -->
+	<STB_BleedAccumulator.reportString>正在给 TargetA 泄压。</STB_BleedAccumulator.reportString>
+
+</LanguageData>

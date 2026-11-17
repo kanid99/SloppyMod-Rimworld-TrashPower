@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LanguageData>
+
+	<!-- EN: sludge pellets -->
+	<STB_SludgePellets.label>污泥颗粒</STB_SludgePellets.label>
+
+	<!-- EN: Fecal sludge that has been dried, pressed and baked into hard fuel pellets for a trash gasifier. Pellets give less energy than refining the sludge into chemfuel, but they don't explode when damaged, burn slowly, and don't rot. -->
+	<STB_SludgePellets.description>经过干燥、压制和烘烤的粪便污泥，制成供垃圾气化炉使用的坚硬燃料颗粒。颗粒的能量比把污泥精炼成化合燃料少，但受损时不会爆炸、燃烧缓慢，而且不会腐烂。</STB_SludgePellets.description>
+
+</LanguageData>
