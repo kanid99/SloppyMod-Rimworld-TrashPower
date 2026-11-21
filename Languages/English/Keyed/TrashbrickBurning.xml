@@ -24,7 +24,7 @@
 	<STB_SettingHazards>Hazards: steam bursts and leaks</STB_SettingHazards>
 	<STB_SettingHazardsDesc>Off: burners without a safety valve vent instead of bursting, and pipes never leak.</STB_SettingHazardsDesc>
 	<STB_SettingOtherFuels>Burners also take wood, chemfuel, deepchem, hay, cloth and bioferrite</STB_SettingOtherFuels>
-	<STB_SettingOtherFuelsDesc>A wood log is worth 0.4 of a trashbrick, a unit of chemfuel 2.5, hay 0.15, cloth 0.25, bioferrite 4 and deepchem 3. Each burner picks which it takes on its fuel bill. Loose trash, wastepacks and corpses are always on it. Takes effect after a restart.</STB_SettingOtherFuelsDesc>
+	<STB_SettingOtherFuelsDesc>A wood log is worth 0.4 of a trashbrick, a unit of chemfuel 2.5, hay 0.15, cloth 0.25, bioferrite 4 and deepchem 3. Each burner picks which it takes on its fuel bill. Loose trash, wastepacks, reactive chempacks, volatile toxpacks and corpses are always on it. Takes effect after a restart.</STB_SettingOtherFuelsDesc>
 	<STB_SettingFuelUse>Fuel use: {0}</STB_SettingFuelUse>
 	<STB_SettingPower>Power output: {0}</STB_SettingPower>
 	<STB_SettingLeaks>Steam leak frequency: {0}</STB_SettingLeaks>

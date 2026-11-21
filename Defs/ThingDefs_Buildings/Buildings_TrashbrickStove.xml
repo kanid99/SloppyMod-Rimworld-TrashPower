@@ -62,6 +62,8 @@
 						     pollution than trashbricks, so burning cleaned-up pollution can't loop. -->
 						<li>VRecyclingE_Trash</li>
 						<li MayRequire="Ludeon.RimWorld.Biotech">Wastepack</li>
+						<li>VRecyclingE_ReactiveChempack</li>
+						<li>VRecyclingE_VolatileToxpack</li>
 					</thingDefs>
 					<!-- Corpses: off on every burner until allowed on its fuel bill. Mechanoids don't burn. -->
 					<categories>
@@ -120,6 +122,11 @@
 					<!-- About 6 cleaned cells make one wastepack; burning one puts back a sliver of that as
 					     ground pollution, and a lot of toxic gas. -->
 					<li MayRequire="Ludeon.RimWorld.Biotech"><thing>Wastepack</thing><value>0.5</value><pollutionFactor>0.25</pollutionFactor><toxGasFactor>8</toxGasFactor><optional>false</optional></li>
+					<!-- VRE's recycled wastepacks. A reactive chempack refines (3 to 5 chemfuel and 3 trash) to about
+					     5.7 bricks' worth, so burnt raw it's worth less, and burns dirty; a volatile toxpack is
+					     concentrated toxic waste - little heat and a huge burst of toxic gas. -->
+					<li><thing>VRecyclingE_ReactiveChempack</thing><value>4</value><pollutionFactor>1.5</pollutionFactor><toxGasFactor>4</toxGasFactor><optional>false</optional></li>
+					<li><thing>VRecyclingE_VolatileToxpack</thing><value>0.5</value><pollutionFactor>0.5</pollutionFactor><toxGasFactor>20</toxGasFactor><optional>false</optional></li>
 				</otherFuels>
 				<!-- Corpses: worth their mass against a trashbrick's at 1:5 (a trashbrick is compressed
 				     matter), so a 60kg human is about 13 bricks. Little toxic gas, and a great deal of rot
@@ -235,6 +242,8 @@
 						     pollution than trashbricks, so burning cleaned-up pollution can't loop. -->
 						<li>VRecyclingE_Trash</li>
 						<li MayRequire="Ludeon.RimWorld.Biotech">Wastepack</li>
+						<li>VRecyclingE_ReactiveChempack</li>
+						<li>VRecyclingE_VolatileToxpack</li>
 					</thingDefs>
 					<!-- Corpses: off on every burner until allowed on its fuel bill. Mechanoids don't burn. -->
 					<categories>
@@ -290,6 +299,11 @@
 					<!-- About 6 cleaned cells make one wastepack; burning one puts back a sliver of that as
 					     ground pollution, and a lot of toxic gas. -->
 					<li MayRequire="Ludeon.RimWorld.Biotech"><thing>Wastepack</thing><value>0.5</value><pollutionFactor>0.25</pollutionFactor><toxGasFactor>8</toxGasFactor><optional>false</optional></li>
+					<!-- VRE's recycled wastepacks. A reactive chempack refines (3 to 5 chemfuel and 3 trash) to about
+					     5.7 bricks' worth, so burnt raw it's worth less, and burns dirty; a volatile toxpack is
+					     concentrated toxic waste - little heat and a huge burst of toxic gas. -->
+					<li><thing>VRecyclingE_ReactiveChempack</thing><value>4</value><pollutionFactor>1.5</pollutionFactor><toxGasFactor>4</toxGasFactor><optional>false</optional></li>
+					<li><thing>VRecyclingE_VolatileToxpack</thing><value>0.5</value><pollutionFactor>0.5</pollutionFactor><toxGasFactor>20</toxGasFactor><optional>false</optional></li>
 				</otherFuels>
 				<!-- Corpses: worth their mass against a trashbrick's at 1:5 (a trashbrick is compressed
 				     matter), so a 60kg human is about 13 bricks. Little toxic gas, and a great deal of rot
@@ -390,6 +404,8 @@
 						     pollution than trashbricks, so burning cleaned-up pollution can't loop. -->
 						<li>VRecyclingE_Trash</li>
 						<li MayRequire="Ludeon.RimWorld.Biotech">Wastepack</li>
+						<li>VRecyclingE_ReactiveChempack</li>
+						<li>VRecyclingE_VolatileToxpack</li>
 					</thingDefs>
 					<!-- Corpses: off on every burner until allowed on its fuel bill. Mechanoids don't burn. -->
 					<categories>
@@ -448,6 +464,11 @@
 					<!-- About 6 cleaned cells make one wastepack; burning one puts back a sliver of that as
 					     ground pollution, and a lot of toxic gas. -->
 					<li MayRequire="Ludeon.RimWorld.Biotech"><thing>Wastepack</thing><value>0.5</value><pollutionFactor>0.25</pollutionFactor><toxGasFactor>8</toxGasFactor><optional>false</optional></li>
+					<!-- VRE's recycled wastepacks. A reactive chempack refines (3 to 5 chemfuel and 3 trash) to about
+					     5.7 bricks' worth, so burnt raw it's worth less, and burns dirty; a volatile toxpack is
+					     concentrated toxic waste - little heat and a huge burst of toxic gas. -->
+					<li><thing>VRecyclingE_ReactiveChempack</thing><value>4</value><pollutionFactor>1.5</pollutionFactor><toxGasFactor>4</toxGasFactor><optional>false</optional></li>
+					<li><thing>VRecyclingE_VolatileToxpack</thing><value>0.5</value><pollutionFactor>0.5</pollutionFactor><toxGasFactor>20</toxGasFactor><optional>false</optional></li>
 				</otherFuels>
 				<!-- Corpses: worth their mass against a trashbrick's at 1:5 (a trashbrick is compressed
 				     matter), so a 60kg human is about 13 bricks. Little toxic gas, and a great deal of rot
@@ -551,6 +572,8 @@
 						     pollution than trashbricks, so burning cleaned-up pollution can't loop. -->
 						<li>VRecyclingE_Trash</li>
 						<li MayRequire="Ludeon.RimWorld.Biotech">Wastepack</li>
+						<li>VRecyclingE_ReactiveChempack</li>
+						<li>VRecyclingE_VolatileToxpack</li>
 					</thingDefs>
 					<!-- Corpses: off on every burner until allowed on its fuel bill. Mechanoids don't burn. -->
 					<categories>
@@ -607,6 +630,11 @@
 					<!-- About 6 cleaned cells make one wastepack; burning one puts back a sliver of that as
 					     ground pollution, and a lot of toxic gas. -->
 					<li MayRequire="Ludeon.RimWorld.Biotech"><thing>Wastepack</thing><value>0.5</value><pollutionFactor>0.25</pollutionFactor><toxGasFactor>8</toxGasFactor><optional>false</optional></li>
+					<!-- VRE's recycled wastepacks. A reactive chempack refines (3 to 5 chemfuel and 3 trash) to about
+					     5.7 bricks' worth, so burnt raw it's worth less, and burns dirty; a volatile toxpack is
+					     concentrated toxic waste - little heat and a huge burst of toxic gas. -->
+					<li><thing>VRecyclingE_ReactiveChempack</thing><value>4</value><pollutionFactor>1.5</pollutionFactor><toxGasFactor>4</toxGasFactor><optional>false</optional></li>
+					<li><thing>VRecyclingE_VolatileToxpack</thing><value>0.5</value><pollutionFactor>0.5</pollutionFactor><toxGasFactor>20</toxGasFactor><optional>false</optional></li>
 				</otherFuels>
 				<!-- Corpses: worth their mass against a trashbrick's at 1:5 (a trashbrick is compressed
 				     matter), so a 60kg human is about 13 bricks. Little toxic gas, and a great deal of rot
@@ -703,6 +731,8 @@
 						     pollution than trashbricks, so burning cleaned-up pollution can't loop. -->
 						<li>VRecyclingE_Trash</li>
 						<li MayRequire="Ludeon.RimWorld.Biotech">Wastepack</li>
+						<li>VRecyclingE_ReactiveChempack</li>
+						<li>VRecyclingE_VolatileToxpack</li>
 					</thingDefs>
 					<!-- Corpses: off on every burner until allowed on its fuel bill. Mechanoids don't burn. -->
 					<categories>
@@ -759,6 +789,11 @@
 					<!-- About 6 cleaned cells make one wastepack; burning one puts back a sliver of that as
 					     ground pollution, and a lot of toxic gas. -->
 					<li MayRequire="Ludeon.RimWorld.Biotech"><thing>Wastepack</thing><value>0.5</value><pollutionFactor>0.25</pollutionFactor><toxGasFactor>8</toxGasFactor><optional>false</optional></li>
+					<!-- VRE's recycled wastepacks. A reactive chempack refines (3 to 5 chemfuel and 3 trash) to about
+					     5.7 bricks' worth, so burnt raw it's worth less, and burns dirty; a volatile toxpack is
+					     concentrated toxic waste - little heat and a huge burst of toxic gas. -->
+					<li><thing>VRecyclingE_ReactiveChempack</thing><value>4</value><pollutionFactor>1.5</pollutionFactor><toxGasFactor>4</toxGasFactor><optional>false</optional></li>
+					<li><thing>VRecyclingE_VolatileToxpack</thing><value>0.5</value><pollutionFactor>0.5</pollutionFactor><toxGasFactor>20</toxGasFactor><optional>false</optional></li>
 				</otherFuels>
 				<!-- Corpses: worth their mass against a trashbrick's at 1:5 (a trashbrick is compressed
 				     matter), so a 60kg human is about 13 bricks. Little toxic gas, and a great deal of rot
@@ -861,6 +896,8 @@
 						<li MayRequire="Ludeon.RimWorld.Anomaly">Bioferrite</li>
 						<li MayRequire="VanillaExpanded.VChemfuelE">VCHE_Deepchem</li>
 						<li MayRequire="Ludeon.RimWorld.Biotech">Wastepack</li>
+						<li>VRecyclingE_ReactiveChempack</li>
+						<li>VRecyclingE_VolatileToxpack</li>
 					</thingDefs>
 				</filter>
 			</fixedStorageSettings>
@@ -873,6 +910,8 @@
 						<li>Chemfuel</li>
 						<li>VRecyclingE_Trash</li>
 						<li MayRequire="Ludeon.RimWorld.Biotech">Wastepack</li>
+						<li>VRecyclingE_ReactiveChempack</li>
+						<li>VRecyclingE_VolatileToxpack</li>
 					</thingDefs>
 				</filter>
 			</defaultStorageSettings>

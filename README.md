@@ -134,6 +134,8 @@ Burners take more than trashbricks. Each fuel is counted at its own value (a Har
 | Chemfuel | 2.5 | x1.5 | x0.6 | take it |
 | Loose trash (VRE) | 1.5 | x0.5 | x3 | take it |
 | Toxic wastepack (Biotech) | 0.5 | x0.25 | x8 | take it |
+| Reactive chempack (VRE) | 4 | x1.5 | x4 | take it |
+| Volatile toxpack (VRE) | 0.5 | x0.5 | x20 | take it |
 | Hay | 0.15 | x0.2 | x0.4 | refuse it |
 | Cloth | 0.25 | x0.5 | x1.5 | refuse it |
 | Bioferrite (Anomaly) | 4 | x1 | x2 | refuse it |
@@ -145,7 +147,7 @@ Burners take more than trashbricks. Each fuel is counted at its own value (a Har
 - **Fuel pipes (Vanilla Chemfuel Expanded):** burners connect to VCE's **chemfuel** and **deepchem** pipe networks: run a pipe under a burner and it tops itself up to its refuel target from the network's tanks, like VCE's own generators. Piped fuel counts at its own value and goes into the fuel mix like hauled fuel, and a fuel the burner's fuel bill refuses isn't drawn - deepchem starts off, so switch it on to burn piped deepchem.
 - **Deepchem** refines 1:2 into chemfuel (5 bricks' worth), so burning it raw wastes some - and it's the filthiest fuel there is.
 - **Corpses** are stripped as they go in (clothes, weapon and inventory drop at the burner) and are worth their **mass**: a trashbrick is compressed matter, so it takes 5 kg of corpse to match 1 kg of brick - with VRE's 0.9 kg bricks, 1 brick per 4.5 kg of body. A 60 kg human is about 13 bricks, a muffalo about 30. A corpse worth more than the burner has room for still goes in whole, and the excess is lost. They burn with a huge cloud of **rot stink** on top of a little toxic gas. It goes down the exhaust like the rest, so pipe it to a port somewhere downwind. Mechanoid corpses don't burn.
-- **Setting:** *Burners also take wood, chemfuel, deepchem, hay, cloth and bioferrite* (on by default, restart to apply) removes those from every burner. Loose trash and wastepacks always burn.
+- **Setting:** *Burners also take wood, chemfuel, deepchem, hay, cloth and bioferrite* (on by default, restart to apply) removes those from every burner. Loose trash, wastepacks, reactive chempacks and volatile toxpacks always burn.
 - The fuel hopper holds all of them; hay, cloth and bioferrite are off in a new hopper's storage settings.
 
 Cleaning about 6 polluted cells makes one wastepack; burning it puts back a tiny fraction of a cell (about 0.008 in a cobbled gasifier) and a burst of toxic gas, so burning cleaned-up pollution can't loop. The fuel in a burner is a mix: its readout says how dirty the current mix burns. The fuel hopper takes them too.

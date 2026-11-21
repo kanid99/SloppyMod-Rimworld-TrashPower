@@ -95,6 +95,10 @@ God mode on, then build a **cobbled trash gasifier**. Give it trashbricks (debug
   rot stink x...*. Unpiped, the room fills with rot stink (colonists get the stench thought); piped,
   it comes out of the port. A muffalo corpse adds about its mass / 4.5 (around 30). Rotten corpses can be refused with the bill's rotten filter. Mechanoid corpses aren't
   hauled.
+- [ ] **Chempacks and toxpacks** (VRE): a new burner's fuel bill lists reactive chempack and volatile
+  toxpack, both allowed. A chempack adds 4 fuel and pushes the mix toward x1.5 pollution / x4 gas; a
+  toxpack adds 0.5 and drives the gas way up (x20). An existing burner from an older save picks them
+  up allowed too. The fuel hopper takes both.
 - [ ] **Deepchem** (with Vanilla Chemfuel Expanded): listed and off by default; on, a unit adds 3 fuel
   and the mix reads x4 pollution, x5 toxic gas.
 - [ ] A burner from a 0.9.49 save loads with its Fuels menu choices carried into the fuel bill
